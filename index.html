@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ArtForge — Ultra Photoreal Image & Video</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="app.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.svg" alt="ArtForge" class="logo" />
+      <div class="brand-text">
+        <h1>ArtForge</h1>
+        <p>Ultra-photoreal image generator</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <label class="small">Server URL</label>
+      <input id="serverUrl" type="text" placeholder="https://your-server.fly.dev" />
+    </div>
+  </header>
+
+  <main class="container">
+    <aside class="panel left">
+      <h2>Prompt</h2>
+      <textarea id="prompt" placeholder="e.g. ultra-realistic photo of a vintage motorcycle racing along a misty coastal highway at golden hour, soft film grain, 35mm"></textarea>
+
+      <div class="row">
+        <div class="col">
+          <label>Provider</label>
+          <select id="provider">
+            <option value="hf" selected>Hugging Face (recommended)</option>
+            <option value="pollinations">Pollinations (free)</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Size</label>
+          <select id="size">
+            <option value="768x768" selected>768 × 768</option>
+            <option value="1024x1024">1024 × 1024</option>
+            <option value="512x512">512 × 512</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Mode</label>
+          <select id="mode">
+            <option value="text2img" selected>Text → Image</option>
+            <option value="img2img">Image → Image</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Steps</label>
+          <input id="steps" type="number" min="1" max="100" value="20" />
+        </div>
+      </div>
+
+      <div id="imgUploadField" style="display:none;">
+        <label>Reference Image (img2img)</label>
+        <input id="imageUpload" type="file" accept="image/*" />
+      </div>
+
+      <div class="actions">
+        <button id="generateBtn">Generate</button>
+        <button id="clearBtn" class="secondary">Clear</button>
+      </div>
+
+      <div class="notes">
+        <strong>Tips:</strong>
+        <ul>
+          <li>Start with a clear subject, mood, and lighting.</li>
+          <li>Use model-specific prompts for faces: “headshot, 50mm, soft rim light”.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <section class="panel right">
+      <div class="result-top">
+        <div id="status" class="status">Idle</div>
+        <div class="result-actions">
+          <button id="downloadBtn" disabled>Download</button>
+          <button id="makeVideoBtn" disabled>Make 3s WebM</button>
+          <a id="videoDownloadLink" style="display:none;" download="generated.webm">Download Video</a>
+        </div>
+      </div>
+
+      <div class="result-area">
+        <img id="resultImg" alt="Generated result" style="display:none;" />
+        <canvas id="videoCanvas" style="display:none;"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">ArtForge • free fallback via Pollinations • HF recommended for best photoreal quality</footer>
+</body>
+</html>
